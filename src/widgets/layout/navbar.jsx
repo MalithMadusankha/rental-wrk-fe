@@ -64,18 +64,17 @@ export function Navbar({ brandName, routes, action }) {
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
-          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
+          <Typography className="ml-2 mr-4 cursor-pointer py-1.5 font-bold">
             {brandName}
           </Typography>
         </Link>
+
         <div className="hidden lg:block">{navList}</div>
+
         <div className="hidden gap-2 lg:flex">
-          <a
-            href="https://www.material-tailwind.com/blocks?ref=mtkr"
-            target="_blank"
-          >
+          <a href="/login">
             <Button variant="text" size="sm" color="white" fullWidth>
-              pro version
+              Login
             </Button>
           </a>
           {React.cloneElement(action, {
@@ -97,18 +96,14 @@ export function Navbar({ brandName, routes, action }) {
         </IconButton>
       </div>
       <MobileNav
-        className="rounded-xl bg-white px-4 pt-2 pb-4 text-blue-gray-900"
+        className="rounded-xl bg-white px-4 pb-4 pt-2 text-blue-gray-900"
         open={openNav}
       >
         <div className="container mx-auto">
           {navList}
-          <a
-            href="https://www.material-tailwind.com/blocks/react?ref=mtkr"
-            target="_blank"
-            className="mb-2 block"
-          >
+          <a href="/login" className="mb-2 block">
             <Button variant="text" size="sm" fullWidth>
-              pro version
+              Login
             </Button>
           </a>
           {React.cloneElement(action, {
@@ -121,14 +116,11 @@ export function Navbar({ brandName, routes, action }) {
 }
 
 Navbar.defaultProps = {
-  brandName: "Material Tailwind React",
+  brandName: "RentMaster",
   action: (
-    <a
-      href="https://www.creative-tim.com/product/material-tailwind-kit-react"
-      target="_blank"
-    >
+    <a href="/sign-up">
       <Button variant="gradient" size="sm" fullWidth>
-        free download
+        Sign Up
       </Button>
     </a>
   ),
