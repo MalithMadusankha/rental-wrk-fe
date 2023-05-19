@@ -1,46 +1,30 @@
 import PropTypes from "prop-types";
 import { Typography, IconButton } from "@material-tailwind/react";
+import { footerLinks, socialLinks } from "@/data";
 
 const year = new Date().getFullYear();
 
-export function Footer({ title, description, socials, menus, copyright }) {
+export function Footer({ socials, copyright }) {
   return (
-    <footer className="relative px-4 pb-6 pt-8">
+    <footer className="relative px-4 pb-6 pt-8 bg-blue-gray-50/50">
       <div className="container mx-auto">
         <div className="flex flex-wrap items-center pt-6 text-center">
           <div className="w-full px-4">
-            <Typography
-              as="a"
-              href=""
-              target="_blank"
-              rel="noreferrer"
-              variant="small"
-              className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
-            >
-              Terms & Conditions
-            </Typography>
-            <Typography
-              as="a"
-              href=""
-              target="_blank"
-              rel="noreferrer"
-              variant="small"
-              className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
-            >
-              Privacy & Policy
-            </Typography>
-            <Typography
-              as="a"
-              href=""
-              target="_blank"
-              rel="noreferrer"
-              variant="small"
-              className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
-            >
-              FAQ
-            </Typography>
-            <div className="mx-auto mb-8 mt-6 flex justify-center gap-2 md:mb-0">
-              {socials.map(({ color, name, path }) => (
+            {footerLinks.map(({ title, href, target }) => (
+              <Typography
+                key={title}
+                as="a"
+                href={href}
+                target={target}
+                rel="noreferrer"
+                variant="small"
+                className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
+              >
+                {title}
+              </Typography>
+            ))}
+            <div className="mx-auto mb-8 mt-6 flex justify-center gap-5 md:mb-0">
+              {socialLinks.map(({ color, name, path }) => (
                 <a
                   key={name}
                   href={path}
@@ -56,38 +40,8 @@ export function Footer({ title, description, socials, menus, copyright }) {
               ))}
             </div>
           </div>
-          {/* <div className="mx-auto mt-12 grid w-max grid-cols-2 gap-24 lg:mt-0">
-            {menus.map(({ name, items }) => (
-              <div key={name}>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 block font-medium uppercase"
-                >
-                  {name}
-                </Typography>
-                <ul className="mt-3">
-                  {items.map((item) => (
-                    <li key={item.name}>
-                      <Typography
-                        as="a"
-                        href={item.path}
-                        target="_blank"
-                        rel="noreferrer"
-                        variant="small"
-                        className="mb-2 block font-normal text-blue-gray-500 hover:text-blue-gray-700"
-                      >
-                        {item.name}
-                      </Typography>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div> */}
         </div>
-        <hr className="my-6 border-gray-300" />
-        <div className="flex flex-wrap items-center justify-center md:justify-between">
+        <div className="mt-6 flex flex-wrap items-center justify-center md:justify-between">
           <div className="mx-auto w-full px-4 text-center">
             <Typography
               variant="small"
@@ -103,18 +57,10 @@ export function Footer({ title, description, socials, menus, copyright }) {
 }
 
 Footer.defaultProps = {
-  title: "Material Tailwind",
-  description:
-    "Easy to use React components for Tailwind CSS and Material Design.",
   socials: [
     {
       color: "blue",
       name: "facebook",
-      path: "",
-    },
-    {
-      color: "light-blue",
-      name: "twitter",
       path: "",
     },
     {
@@ -123,13 +69,18 @@ Footer.defaultProps = {
       path: "",
     },
     {
-      color: "pink",
-      name: "google",
+      color: "light-blue",
+      name: "twitter",
       path: "",
     },
     {
       color: "red",
-      name: "youtube",
+      name: "google",
+      path: "",
+    },
+    {
+      color: "blue",
+      name: "linkedin",
       path: "",
     },
   ],
@@ -137,10 +88,7 @@ Footer.defaultProps = {
 };
 
 Footer.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
   socials: PropTypes.arrayOf(PropTypes.object),
-  menus: PropTypes.arrayOf(PropTypes.object),
   copyright: PropTypes.node,
 };
 

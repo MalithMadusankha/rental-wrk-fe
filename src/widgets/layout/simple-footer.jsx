@@ -1,61 +1,52 @@
-import PropTypes from "prop-types";
-import { Typography } from "@material-tailwind/react";
-import { HeartIcon } from "@heroicons/react/24/solid";
+import { Typography, IconButton } from "@material-tailwind/react";
+import { footerLinks, socialLinks } from "@/data";
 
-export function SimpleFooter({ brandName, brandLink, routes }) {
+export function SimpleFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="py-2">
-      <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
-        <Typography variant="small" className="font-normal text-inherit">
-          &copy; {year}, made with{" "}
-          <HeartIcon className="-mt-0.5 inline-block h-3.5 w-3.5" /> by{" "}
-          <a
-            href={brandLink}
-            target="_blank"
-            className="transition-colors hover:text-blue-500"
-          >
-            {brandName}
-          </a>{" "}
-          for a better web.
-        </Typography>
-        <ul className="flex items-center gap-4">
-          {routes.map(({ name, path }) => (
-            <li key={name}>
-              <Typography
-                as="a"
+      <div className="flex w-full flex-wrap items-center text-center justify-center gap-6 px-2 md:justify-between">
+        <div className="w-full px-4">
+          <ul className="flex items-center justify-center gap-6">
+            {footerLinks.map(({ title, href, target }) => (
+              <li key={title}>
+                <Typography
+                  as="a"
+                  href={href}
+                  target={target}
+                  variant="small"
+                  className="px-1 py-0.5 font-normal text-inherit transition-colors hover:text-blue-500"
+                >
+                  {title}
+                </Typography>
+              </li>
+            ))}
+          </ul>
+          <div className="mx-auto mt-3 flex justify-center gap-5 md:mb-0">
+            {socialLinks.map(({ color, name, path }) => (
+              <a
+                key={name}
                 href={path}
                 target="_blank"
-                variant="small"
-                className="py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500"
+                rel="noopener noreferrer"
               >
-                {name}
-              </Typography>
-            </li>
-          ))}
-        </ul>
+                <IconButton color="white" className="rounded-full">
+                  <Typography color={color}>
+                    <i className={`fa-brands fa-${name}`} />
+                  </Typography>
+                </IconButton>
+              </a>
+            ))}
+          </div>
+          <Typography variant="small" className="font-normal text-inherit mt-3">
+            Copyright © {year} RentalMaster.
+          </Typography>
+        </div>
       </div>
     </footer>
   );
 }
-
-SimpleFooter.defaultProps = {
-  brandName: "Creative Tim",
-  brandLink: "https://www.creative-tim.com",
-  routes: [
-    { name: "Creative Tim", path: "https://www.creative-tim.com" },
-    { name: "About Us", path: "https://www.creative-tim.com/presentation" },
-    { name: "Blog", path: "https://www.creative-tim.com/blog" },
-    { name: "License", path: "https://www.creative-tim.com/license" },
-  ],
-};
-
-SimpleFooter.propTypes = {
-  brandName: PropTypes.string,
-  brandLink: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object),
-};
 
 SimpleFooter.displayName = "/src/widgets/layout/simple-footer.jsx";
 

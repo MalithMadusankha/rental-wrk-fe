@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
 
-export function SignIn() {
+export function Login() {
   return (
     <>
       <img
@@ -27,7 +27,7 @@ export function SignIn() {
             className="mb-4 grid h-28 place-items-center"
           >
             <Typography variant="h3" color="white">
-              Sign In
+              Login
             </Typography>
           </CardHeader>
           <CardBody className="flex flex-col gap-4">
@@ -44,7 +44,7 @@ export function SignIn() {
           </CardBody>
           <CardFooter className="pt-0">
             <Button variant="gradient" fullWidth>
-              Sign In
+              Login
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
               Don't have an account?
@@ -69,4 +69,4 @@ export function SignIn() {
   );
 }
 
-export default SignIn;
+export default Login;

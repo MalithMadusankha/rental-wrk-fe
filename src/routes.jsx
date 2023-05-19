@@ -1,4 +1,4 @@
-import { Home, Profile, SignIn, SignUp } from "@/pages";
+import { Home, Profile, Login, SignUp, SignUpType } from "@/pages";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -6,6 +6,7 @@ import {
   UserPlusIcon,
   DocumentTextIcon,
 } from "@heroicons/react/24/solid";
+import { userType } from "./data";
 
 export const routes = [
   {
@@ -24,19 +25,46 @@ export const routes = [
     icon: ArrowRightOnRectangleIcon,
     name: "Advertisements",
     path: "/advertisements",
-    element: <SignIn />,
+    element: "",
   },
   {
     icon: UserPlusIcon,
     name: "Know More",
     path: "/know-more",
-    element: <SignUp />,
+    element: "",
   },
   {
     icon: DocumentTextIcon,
     name: "Contact Us",
-    href: "/contact",
+    path: "/contact",
     element: "",
+  },
+];
+
+export const authRouts = [
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Login",
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    icon: UserPlusIcon,
+    name: "Sign Up",
+    path: "/sign-up",
+    element: <SignUpType />,
+  },
+  {
+    icon: UserPlusIcon,
+    name: "Sign Up",
+    path: "/sign-up-customer",
+    element: <SignUp type={userType.customer} />,
+  },
+  {
+    icon: UserPlusIcon,
+    name: "Sign Up",
+    path: "/sign-up-worker",
+    element: <SignUp type={userType.worker} />,
   },
 ];
 

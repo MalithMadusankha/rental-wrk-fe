@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar } from "@/widgets/layout";
-import routes from "@/routes";
+import routes, { authRouts } from "@/routes";
 
 function App() {
   return (
@@ -9,6 +9,10 @@ function App() {
         <Navbar routes={routes} />
       </div>
       <Routes>
+        {authRouts.map(
+          ({ path, element }, key) =>
+            element && <Route key={key} exact path={path} element={element} />
+        )}
         {routes.map(
           ({ path, element }, key) =>
             element && <Route key={key} exact path={path} element={element} />
