@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -13,6 +14,8 @@ import { SimpleFooter } from "@/widgets/layout";
 import { userType } from "@/data";
 
 export function SignUp({ type }) {
+  const [showPw, setShowPw] = useState(false);
+
   return (
     <>
       <img
@@ -36,32 +39,48 @@ export function SignUp({ type }) {
             </Typography>
             </div>
           </CardHeader>
+
           <CardBody className="flex flex-col gap-4">
             <Input variant="standard" label="Name" size="lg" />
             <Input variant="standard" type="email" label="Email" size="lg" />
             <Input
               variant="standard"
               type="password"
-              label="New password"
+              label="Password"
               size="lg"
+              icon={
+                showPw ? (
+                  <i className="fas fa-eye" onClick={() => setShowPw(false)} />
+                ) : (
+                  <i className="fas fa-eye-slash" onClick={() => setShowPw(true)} />
+                )
+              }
             />
             <Input
               variant="standard"
               type="password"
-              label="Re enter new password"
+              label="Confirm password"
               size="lg"
+              icon={
+                showPw ? (
+                  <i className="fas fa-eye" onClick={() => setShowPw(false)} />
+                ) : (
+                  <i className="fas fa-eye-slash" onClick={() => setShowPw(true)} />
+                )
+              }
             />
             <div className="-ml-2.5">
               <Checkbox label="I agree the Terms and Conditions" />
             </div>
           </CardBody>
+
           <CardFooter className="pt-0">
             <Button
               variant="gradient"
               fullWidth
               color={type === userType.customer ? "blue" : "green"}
             >
-              Sign Up
+              Create Account
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
               Already have an account?
