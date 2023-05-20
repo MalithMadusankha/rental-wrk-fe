@@ -19,10 +19,13 @@ export const appRoutes = {
       serviceProvider: "/service-provider",
     },
     profileRouts: {
-      myProfile: "/app-type",
-      editProfile: "/chatbot",
+      myProfile: "/profile",
+      editProfile: "/edit-profile",
       inbox: "/inbox",
       logout: "/home",
+    },
+    viewProfileRouts: {
+      serviceProviderView: "/service-provider-profile",
     },
 };
   

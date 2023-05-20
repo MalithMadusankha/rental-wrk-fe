@@ -13,7 +13,7 @@ export function CustomerPage() {
       >
         <div className="absolute top-0 h-full w-full bg-black/50" />
         <div className="max-w-8xl container relative m-auto">
-          <LocationContainer isCustomer={true}/>
+          <LocationContainer isCustomer={true} />
         </div>
       </div>
 
@@ -27,8 +27,8 @@ export function CustomerPage() {
             Service Providers
           </Typography>
           <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {serviceProviderData.map(({ img, name }) => (
-              <PersonCard img={img} name={name} key={name} />
+            {serviceProviderData.map(({ userID, img, name }) => (
+              <PersonCard id={userID} img={img} name={name} key={userID} />
             ))}
           </div>
         </div>

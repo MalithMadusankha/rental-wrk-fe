@@ -8,6 +8,7 @@ import {
   ChatBot,
   CustomerPage,
   ServiceProviderPage,
+  ProfileView,
 } from "@/pages";
 import {
   HomeIcon,
@@ -30,7 +31,7 @@ export const routes = [
     icon: UserCircleIcon,
     name: "About Us",
     path: appRoutes.publicRouts.about,
-    element: <Profile />,
+    element: "",
     isInfoRoute: true,
   },
   {
@@ -107,6 +108,21 @@ export const secureRouts = [
     name: "Service Provider",
     path: appRoutes.secureRouts.serviceProvider,
     element: <ServiceProviderPage />,
+  },
+];
+
+export const profileRouts = [
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "My Profile",
+    path: appRoutes.profileRouts.myProfile,
+    element: <Profile />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Service Provider View",
+    path: appRoutes.viewProfileRouts.serviceProviderView,
+    element: <ProfileView />,
   },
 ];
 

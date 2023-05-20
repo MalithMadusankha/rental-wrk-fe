@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import {
   Card,
   Avatar,
@@ -9,10 +9,22 @@ import {
   CardFooter,
   Button,
 } from "@material-tailwind/react";
+import { appRoutes } from "@/data";
 
-export function PersonCard({ img, name }) {
+export const PersonCard = ({ id, img, name }) => {
+  const navigate = useNavigate();
+
+  const handleView = () => {
+    navigate({
+      pathname: appRoutes.profileRouts.myProfile,
+      search: `?${createSearchParams({
+        userID: id,
+      })}`,
+    });
+  };
+
   return (
-    <Card shadow={false} className="text-center bg-black/10">
+    <Card shadow={false} className="bg-black/10 text-center">
       <CardHeader floated={false} className="h-80">
         <Avatar
           src={img}
@@ -28,26 +40,12 @@ export function PersonCard({ img, name }) {
         </Typography>
       </CardBody>
       <CardFooter className="pt-3">
-        <Button size="lg" fullWidth={true}>
+        <Button size="lg" fullWidth={true} onClick={handleView}>
           View
         </Button>
       </CardFooter>
     </Card>
   );
-}
-
-PersonCard.defaultProps = {
-  position: "",
-  socials: null,
 };
-
-PersonCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  position: PropTypes.string,
-  socials: PropTypes.node,
-};
-
-PersonCard.displayName = "/src/widgets/layout/team-card.jsx";
 
 export default PersonCard;

@@ -10,7 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/solid";
-import { secureRouts } from "@/routes";
+import { secureRouts, profileRouts } from "@/routes";
 import { appRoutes } from "@/data";
 import { InfoMenu, ProfileMenu } from "@/widgets/navMenu";
 
@@ -28,11 +28,16 @@ export function Navbar({ brandName, routes }) {
   const navigate = useNavigate();
 
   const secureURLs = [];
+
   secureRouts.forEach((route) => {
     secureURLs.push(route.path);
     if (route.path !== appRoutes.secureRouts.appType) {
       secureNavList.push(route);
     }
+  });
+
+  profileRouts.forEach((route) => {
+    secureURLs.push(route.path);
   });
 
   useEffect(() => {
@@ -60,7 +65,21 @@ export function Navbar({ brandName, routes }) {
     );
   }, []);
 
-  const NavBtn = ({ name, path, target, icon }) => {
+  const NavBtn = ({ name, path, target, icon, isSecureURL }) => {
+    if (
+      isSecureURL &&
+      JSON.parse(sessionStorage.getItem("isCustomer")) &&
+      path === appRoutes.secureRouts.serviceProvider
+    ) {
+      return;
+    } else if (
+      isSecureURL &&
+      !JSON.parse(sessionStorage.getItem("isCustomer")) &&
+      (path === appRoutes.secureRouts.chatbot ||
+        path === appRoutes.secureRouts.customer)
+    ) {
+      return;
+    }
     return (
       <Typography
         key={name}
@@ -95,6 +114,7 @@ export function Navbar({ brandName, routes }) {
               path={path}
               icon={icon}
               target={target}
+              isSecureURL={false}
             />
           ))}
         {isLoged && (
@@ -106,6 +126,7 @@ export function Navbar({ brandName, routes }) {
                 path={path}
                 icon={icon}
                 target={target}
+                isSecureURL={false}
               />
             ))}
             {isMobile ? (
@@ -116,6 +137,7 @@ export function Navbar({ brandName, routes }) {
                   path={path}
                   icon={icon}
                   target={target}
+                  isSecureURL={false}
                 />
               ))
             ) : (
@@ -128,6 +150,7 @@ export function Navbar({ brandName, routes }) {
                 path={path}
                 icon={icon}
                 target={target}
+                isSecureURL={true}
               />
             ))}
           </>

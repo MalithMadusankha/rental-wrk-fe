@@ -12,7 +12,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
-import { appRoutes } from "@/data";
+import { appRoutes, userData } from "@/data";
 
 export function Login() {
   const [showPw, setShowPw] = useState(false);
@@ -22,6 +22,7 @@ export function Login() {
 
   const handleLogin = () => {
     sessionStorage.setItem("isLogged", true);
+    sessionStorage.setItem("userData", JSON.stringify(userData));
     if (isCustomer) {
       sessionStorage.setItem('isCustomer', true);
       setIsCustomer(true);

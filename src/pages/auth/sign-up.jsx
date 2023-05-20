@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
-import { appRoutes, userType } from "@/data";
+import { appRoutes, userData, userType } from "@/data";
 
 export function SignUp({ type }) {
   const [showPw, setShowPw] = useState(false);
@@ -20,9 +20,12 @@ export function SignUp({ type }) {
 
   const handleSignUp = () => {
     sessionStorage.setItem("isLogged", true);
+    sessionStorage.setItem("userData", JSON.stringify(userData));
     if (type === userType.customer) {
+      sessionStorage.setItem("isCustomer", true);
       navigate(appRoutes.secureRouts.appType);
     } else {
+      sessionStorage.setItem("isCustomer", false);
       navigate(appRoutes.secureRouts.serviceProvider);
     }
   };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import {
   Typography,
   Button,
@@ -16,13 +16,21 @@ export function NavDropdown({ children, childernClass, menu }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
   const handleClick = (url) => {
     setIsMenuOpen(false);
     if (url === appRoutes.profileRouts.logout) {
       sessionStorage.setItem("isLogged", false);
+      navigate(url);
+    } else {
+      navigate({
+        pathname: url,
+        search: `?${createSearchParams({
+          userID: userData.userID,
+        })}`,
+      });
     }
-    navigate(url);
   };
 
   return (

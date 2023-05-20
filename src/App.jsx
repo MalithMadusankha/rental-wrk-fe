@@ -1,11 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Navbar } from "@/widgets/layout";
-import routes, { authRouts, secureRouts } from "@/routes";
+import routes, { authRouts, secureRouts, profileRouts } from "@/routes";
 import { appRoutes } from "./data";
 
 function App() {
   sessionStorage.setItem('isLogged', false);
   sessionStorage.setItem('isCustomer', true);
+  sessionStorage.setItem("userData", JSON.stringify({}));
 
   return (
     <>
@@ -22,6 +23,10 @@ function App() {
             element && <Route key={key} exact path={path} element={element} />
         )}
         {routes.map(
+          ({ path, element }, key) =>
+            element && <Route key={key} exact path={path} element={element} />
+        )}
+        {profileRouts.map(
           ({ path, element }, key) =>
             element && <Route key={key} exact path={path} element={element} />
         )}
