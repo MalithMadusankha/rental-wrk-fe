@@ -1,3 +1,4 @@
+import React from "react";
 import { Typography, IconButton } from "@material-tailwind/react";
 import { footerLinks, socialLinks } from "@/data";
 

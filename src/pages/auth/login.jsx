@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -12,9 +12,18 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
+import { appRoutes } from "@/data";
 
 export function Login() {
   const [showPw, setShowPw] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    sessionStorage.setItem("isLogged", true);
+    navigate('/app-type');
+  };
+
   return (
     <>
       <img
@@ -45,7 +54,10 @@ export function Login() {
                 showPw ? (
                   <i className="fas fa-eye" onClick={() => setShowPw(false)} />
                 ) : (
-                  <i className="fas fa-eye-slash" onClick={() => setShowPw(true)} />
+                  <i
+                    className="fas fa-eye-slash"
+                    onClick={() => setShowPw(true)}
+                  />
                 )
               }
             />
@@ -55,12 +67,12 @@ export function Login() {
           </CardBody>
 
           <CardFooter className="pt-0">
-            <Button variant="gradient" fullWidth>
+            <Button variant="gradient" fullWidth onClick={handleLogin}>
               Login
             </Button>
             <Typography variant="small" className="mt-1 flex justify-center">
               I forgot my password :(
-              <Link to="/sign-up">
+              <Link to={appRoutes.authRouts.signUp}>
                 <Typography
                   as="span"
                   variant="small"
@@ -101,7 +113,7 @@ export function Login() {
 
             <Typography variant="small" className="mt-2 flex justify-center">
               Don't have an account?
-              <Link to="/sign-up">
+              <Link to={appRoutes.authRouts.signUp}>
                 <Typography
                   as="span"
                   variant="small"

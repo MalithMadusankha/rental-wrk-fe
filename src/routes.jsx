@@ -1,4 +1,13 @@
-import { Home, Profile, Login, SignUp, SignUpType } from "@/pages";
+import {
+  Home,
+  Profile,
+  Login,
+  SignUp,
+  SignUpType,
+  AppType,
+  ChatBot,
+  Customer,
+} from "@/pages";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -6,37 +15,37 @@ import {
   UserPlusIcon,
   DocumentTextIcon,
 } from "@heroicons/react/24/solid";
-import { userType } from "./data";
+import { userType, appRoutes } from "./data";
 
 export const routes = [
   {
     icon: HomeIcon,
     name: "Home",
-    path: "/home",
+    path: appRoutes.publicRouts.home,
     element: <Home />,
   },
   {
     icon: UserCircleIcon,
     name: "About Us",
-    path: "/profile",
+    path: appRoutes.publicRouts.about,
     element: <Profile />,
   },
   {
     icon: ArrowRightOnRectangleIcon,
     name: "Advertisements",
-    path: "/advertisements",
+    path: appRoutes.publicRouts.advertisements,
     element: "",
   },
   {
     icon: UserPlusIcon,
     name: "Know More",
-    path: "/know-more",
+    path: appRoutes.publicRouts.knowMore,
     element: "",
   },
   {
     icon: DocumentTextIcon,
     name: "Contact Us",
-    path: "/contact",
+    path: appRoutes.publicRouts.contact,
     element: "",
   },
 ];
@@ -45,26 +54,47 @@ export const authRouts = [
   {
     icon: ArrowRightOnRectangleIcon,
     name: "Login",
-    path: "/login",
+    path: appRoutes.authRouts.login,
     element: <Login />,
   },
   {
     icon: UserPlusIcon,
     name: "Sign Up",
-    path: "/sign-up",
+    path: appRoutes.authRouts.signUp,
     element: <SignUpType />,
   },
   {
     icon: UserPlusIcon,
-    name: "Sign Up",
-    path: "/sign-up-customer",
+    name: "Sign Up Customer",
+    path: appRoutes.authRouts.signUpCustomer,
     element: <SignUp type={userType.customer} />,
   },
   {
     icon: UserPlusIcon,
-    name: "Sign Up",
-    path: "/sign-up-worker",
+    name: "Sign Up Worker",
+    path: appRoutes.authRouts.signUpWorker,
     element: <SignUp type={userType.worker} />,
+  },
+];
+
+export const secureRouts = [
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "App Type",
+    path: appRoutes.secureRouts.appType,
+    element: <AppType />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Chat Bot",
+    path: appRoutes.secureRouts.chatbot,
+    element: <ChatBot />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Customer",
+    path: appRoutes.secureRouts.customer,
+    element: <Customer />,
   },
 ];
 

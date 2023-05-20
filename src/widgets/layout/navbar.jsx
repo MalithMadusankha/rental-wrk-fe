@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Navbar as MTNavbar,
   MobileNav,
@@ -9,11 +9,33 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/solid";
+import { secureRouts } from "@/routes";
+import { appRoutes } from "@/data";
+import { ProfileMenu } from "@/widgets/profile";
 
 export function Navbar({ brandName, routes }) {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  const [isLoged, setIsLoged] = useState(
+    JSON.parse(sessionStorage.getItem("isLogged"))
+  );
 
-  React.useEffect(() => {
+  const secureURLs = [];
+  secureRouts.forEach((route) => {
+    secureURLs.push(route.path);
+  });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (secureURLs.includes(location.pathname) && !JSON.parse(sessionStorage.getItem("isLogged"))) {
+      navigate(appRoutes.publicRouts.home);
+    }
+    setIsLoged(JSON.parse(sessionStorage.getItem("isLogged")));
+  }, [location]);
+
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
@@ -62,7 +84,7 @@ export function Navbar({ brandName, routes }) {
 
   const LoginBtn = ({ isMobile }) => {
     return (
-      <a href="/login">
+      <Link to={appRoutes.authRouts.login}>
         <Button
           variant="text"
           size="sm"
@@ -71,17 +93,33 @@ export function Navbar({ brandName, routes }) {
         >
           Login
         </Button>
-      </a>
+      </Link>
     );
   };
 
   const SignInBtn = () => {
     return (
-      <a href="/sign-up">
+      <Link to={appRoutes.authRouts.signUp}>
         <Button variant="gradient" size="sm" fullWidth>
           Sign Up
         </Button>
-      </a>
+      </Link>
+    );
+  };
+
+  const ProfilePanel = () => {
+    return (
+      <div className="flex items-center">
+        <IconButton
+          variant="text"
+          color="white"
+          size="sm"
+          className="rounded-full mx-1"
+        >
+          <BellIcon className="h-5 w-5" />
+        </IconButton>
+        <ProfileMenu />
+      </div>
     );
   };
 
@@ -97,8 +135,14 @@ export function Navbar({ brandName, routes }) {
         <div className="hidden lg:block">{navList}</div>
 
         <div className="hidden gap-2 lg:flex">
-          <LoginBtn isMobile={false} />
-          <SignInBtn />
+          {isLoged ? (
+            <ProfilePanel />
+          ) : (
+            <>
+              <LoginBtn isMobile={false} />
+              <SignInBtn />
+            </>
+          )}
         </div>
 
         <IconButton
@@ -122,8 +166,14 @@ export function Navbar({ brandName, routes }) {
       >
         <div className="container mx-auto">
           {navList}
-          <LoginBtn isMobile={true} />
-          <SignInBtn />
+          {isLoged ? (
+            <ProfilePanel />
+          ) : (
+            <>
+              <LoginBtn isMobile={true} />
+              <SignInBtn />
+            </>
+          )}
         </div>
       </MobileNav>
     </MTNavbar>

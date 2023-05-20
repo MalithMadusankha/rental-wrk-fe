@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
-import { userType } from "@/data";
+import { appRoutes, userType } from "@/data";
 
 export function SignUp({ type }) {
   const [showPw, setShowPw] = useState(false);
@@ -84,7 +84,7 @@ export function SignUp({ type }) {
             </Button>
             <Typography variant="small" className="mt-6 flex justify-center">
               Already have an account?
-              <Link to="/login">
+              <Link to={appRoutes.authRouts.login}>
                 <Typography
                   as="span"
                   variant="small"
