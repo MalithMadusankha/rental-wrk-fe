@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/widgets/layout";
-import { FeatureCard, TeamCard } from "@/widgets/cards";
+import { FeatureCard } from "@/widgets/cards";
 import { featuresData, addData, contactData } from "@/data";
 import man1 from "../../assets/man1.png";
 
