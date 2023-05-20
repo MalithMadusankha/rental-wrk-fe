@@ -1,1 +1,0 @@
-export * from "@/widgets/profile/profile-menu";

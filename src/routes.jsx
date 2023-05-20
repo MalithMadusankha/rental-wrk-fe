@@ -23,30 +23,35 @@ export const routes = [
     name: "Home",
     path: appRoutes.publicRouts.home,
     element: <Home />,
+    isInfoRoute: false,
   },
   {
     icon: UserCircleIcon,
     name: "About Us",
     path: appRoutes.publicRouts.about,
     element: <Profile />,
+    isInfoRoute: true,
   },
   {
     icon: ArrowRightOnRectangleIcon,
     name: "Advertisements",
     path: appRoutes.publicRouts.advertisements,
     element: "",
+    isInfoRoute: false,
   },
   {
     icon: UserPlusIcon,
     name: "Know More",
     path: appRoutes.publicRouts.knowMore,
     element: "",
+    isInfoRoute: true,
   },
   {
     icon: DocumentTextIcon,
     name: "Contact Us",
     path: appRoutes.publicRouts.contact,
     element: "",
+    isInfoRoute: true,
   },
 ];
 

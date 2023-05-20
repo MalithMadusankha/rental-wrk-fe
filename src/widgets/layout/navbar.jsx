@@ -12,7 +12,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { secureRouts } from "@/routes";
 import { appRoutes } from "@/data";
-import { ProfileMenu } from "@/widgets/profile";
+import { InfoMenu, ProfileMenu } from "@/widgets/navMenu";
 
 export function Navbar({ brandName, routes }) {
   const [openNav, setOpenNav] = useState(false);
@@ -20,20 +20,38 @@ export function Navbar({ brandName, routes }) {
     JSON.parse(sessionStorage.getItem("isLogged"))
   );
 
-  const secureURLs = [];
-  secureRouts.forEach((route) => {
-    secureURLs.push(route.path);
-  });
+  const commonNavList = [];
+  const infoNavList = [];
+  const secureNavList = [];
 
   const location = useLocation();
   const navigate = useNavigate();
 
+  const secureURLs = [];
+  secureRouts.forEach((route) => {
+    secureURLs.push(route.path);
+    if (route.path !== appRoutes.secureRouts.appType) {
+      secureNavList.push(route);
+    }
+  });
+
   useEffect(() => {
-    if (secureURLs.includes(location.pathname) && !JSON.parse(sessionStorage.getItem("isLogged"))) {
+    if (
+      secureURLs.includes(location.pathname) &&
+      !JSON.parse(sessionStorage.getItem("isLogged"))
+    ) {
       navigate(appRoutes.publicRouts.home);
     }
     setIsLoged(JSON.parse(sessionStorage.getItem("isLogged")));
   }, [location]);
+
+  routes.forEach((route) => {
+    if (isLoged && route.isInfoRoute) {
+      infoNavList.push(route);
+    } else if (isLoged && !route.isInfoRoute) {
+      commonNavList.push(route);
+    }
+  });
 
   useEffect(() => {
     window.addEventListener(
@@ -42,45 +60,81 @@ export function Navbar({ brandName, routes }) {
     );
   }, []);
 
-  const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {routes.map(({ name, path, icon, href, target }) => (
-        <Typography
-          key={name}
-          as="li"
-          variant="small"
-          color="inherit"
-          className="capitalize"
+  const NavBtn = ({ name, path, target, icon }) => {
+    return (
+      <Typography
+        key={name}
+        as="li"
+        variant="small"
+        color="inherit"
+        className="capitalize"
+      >
+        <Link
+          to={path}
+          target={target}
+          className="flex items-center gap-1 p-1 font-normal"
         >
-          {href ? (
-            <a
-              href={href}
+          {icon &&
+            React.createElement(icon, {
+              className: "w-[18px] h-[18px] opacity-75 mr-1",
+            })}
+          {name}
+        </Link>
+      </Typography>
+    );
+  };
+
+  const NavList = ({ isMobile }) => {
+    return (
+      <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        {!isLoged &&
+          routes.map(({ name, path, icon, target }) => (
+            <NavBtn
+              key={name}
+              name={name}
+              path={path}
+              icon={icon}
               target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </a>
-          ) : (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </Link>
-          )}
-        </Typography>
-      ))}
-    </ul>
-  );
+            />
+          ))}
+        {isLoged && (
+          <>
+            {commonNavList.map(({ name, path, icon, target }) => (
+              <NavBtn
+                key={name}
+                name={name}
+                path={path}
+                icon={icon}
+                target={target}
+              />
+            ))}
+            {isMobile ? (
+              infoNavList.map(({ name, path, icon, target }) => (
+                <NavBtn
+                  key={name}
+                  name={name}
+                  path={path}
+                  icon={icon}
+                  target={target}
+                />
+              ))
+            ) : (
+              <InfoMenu infoNavList={infoNavList} />
+            )}
+            {secureNavList.map(({ name, path, icon, target }) => (
+              <NavBtn
+                key={name}
+                name={name}
+                path={path}
+                icon={icon}
+                target={target}
+              />
+            ))}
+          </>
+        )}
+      </ul>
+    );
+  };
 
   const LoginBtn = ({ isMobile }) => {
     return (
@@ -114,7 +168,7 @@ export function Navbar({ brandName, routes }) {
           variant="text"
           color="white"
           size="sm"
-          className="rounded-full mx-1"
+          className="mx-1 rounded-full"
         >
           <BellIcon className="h-5 w-5" />
         </IconButton>
@@ -132,7 +186,9 @@ export function Navbar({ brandName, routes }) {
           </Typography>
         </Link>
 
-        <div className="hidden lg:block">{navList}</div>
+        <div className="hidden lg:block">
+          <NavList isMobile={false} />
+        </div>
 
         <div className="hidden gap-2 lg:flex">
           {isLoged ? (
@@ -165,7 +221,7 @@ export function Navbar({ brandName, routes }) {
         open={openNav}
       >
         <div className="container mx-auto">
-          {navList}
+          <NavList isMobile={true} />
           {isLoged ? (
             <ProfilePanel />
           ) : (
