@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { SimpleFooter } from "@/widgets/layout";
-import { Input, IconButton, Card, CardBody } from "@material-tailwind/react";
+import {
+  Input,
+  IconButton,
+  Card,
+  CardBody,
+  Button,
+  CardFooter,
+} from "@material-tailwind/react";
+import chatbot from "../../assets/chatbot.png";
+import { ChatCard } from "@/widgets/chatbot";
 
 export function ChatBot() {
   const [searchedText, setSearchedText] = useState("");
@@ -17,7 +26,7 @@ export function ChatBot() {
             <div className="w-full">
               <div className="w-full">
                 <Input
-                  placeholder="Search"
+                  placeholder="Search in Chat"
                   value={searchedText}
                   onChange={onChange}
                   className="pr-20"
@@ -34,8 +43,34 @@ export function ChatBot() {
                 </IconButton>
               </div>
 
-              <Card className="mt-5 bg-white/10" style={{height: "90%"}}>
-                <CardBody> hi </CardBody>
+              <Card className="mt-5 bg-white/10" style={{ height: "90%" }}>
+                <CardBody className="h-full px-2 " style={{ overflow: "auto" }}>
+                  <img alt="Card Image" src={chatbot} className="h-20 w-20 mx-auto mb-4" />
+                  <div>
+                    <ChatCard isUserChat={false} chat="Hi.! How can I help you?"/>
+                    <ChatCard isUserChat={true} chat="Hi.! I want to know about today whether in Colombo"/>
+                    <ChatCard isUserChat={false} chat="Sure. I can provide that informations for you."/>
+                    
+                  </div>
+                </CardBody>
+
+                <CardFooter className="p-2">
+                  <div className="flex justify-center gap-3">
+                    <Input
+                      // placeholder="Search in Chat"
+                      // value={}
+                      // onChange={}
+                      size="lg"
+                      className="bg-white pr-20"
+                      containerProps={{
+                        className: "min-w-0",
+                      }}
+                    />
+                    <Button>
+                      <i className="fa fa-microphone" />
+                    </Button>
+                  </div>
+                </CardFooter>
               </Card>
             </div>
           </div>
