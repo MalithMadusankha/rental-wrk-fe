@@ -16,12 +16,21 @@ import { appRoutes } from "@/data";
 
 export function Login() {
   const [showPw, setShowPw] = useState(false);
+  const [isCustomer, setIsCustomer] = useState(true);
 
   const navigate = useNavigate();
 
   const handleLogin = () => {
     sessionStorage.setItem("isLogged", true);
-    navigate('/app-type');
+    if (isCustomer) {
+      sessionStorage.setItem('isCustomer', true);
+      setIsCustomer(true);
+      navigate(appRoutes.secureRouts.appType);
+    } else {
+      sessionStorage.setItem('isCustomer', false);
+      setIsCustomer(false);
+      navigate(appRoutes.secureRouts.serviceProvider);
+    }
   };
 
   return (

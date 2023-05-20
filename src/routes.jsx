@@ -6,7 +6,8 @@ import {
   SignUpType,
   AppType,
   ChatBot,
-  Customer,
+  CustomerPage,
+  ServiceProviderPage,
 } from "@/pages";
 import {
   HomeIcon,
@@ -99,7 +100,13 @@ export const secureRouts = [
     icon: ArrowRightOnRectangleIcon,
     name: "Customer",
     path: appRoutes.secureRouts.customer,
-    element: <Customer />,
+    element: <CustomerPage />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Service Provider",
+    path: appRoutes.secureRouts.serviceProvider,
+    element: <ServiceProviderPage />,
   },
 ];
 

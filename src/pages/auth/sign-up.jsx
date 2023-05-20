@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -16,6 +16,17 @@ import { appRoutes, userType } from "@/data";
 export function SignUp({ type }) {
   const [showPw, setShowPw] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    sessionStorage.setItem("isLogged", true);
+    if (type === userType.customer) {
+      navigate(appRoutes.secureRouts.appType);
+    } else {
+      navigate(appRoutes.secureRouts.serviceProvider);
+    }
+  };
+
   return (
     <>
       <img
@@ -31,12 +42,12 @@ export function SignUp({ type }) {
             className="mb-4 grid h-28 place-items-center"
           >
             <div className="text-center">
-            <Typography variant="h5" color="white">
-              {type}
-            </Typography>
-            <Typography variant="h3" color="white">
-              Sign Up
-            </Typography>
+              <Typography variant="h5" color="white">
+                {type}
+              </Typography>
+              <Typography variant="h3" color="white">
+                Sign Up
+              </Typography>
             </div>
           </CardHeader>
 
@@ -52,7 +63,10 @@ export function SignUp({ type }) {
                 showPw ? (
                   <i className="fas fa-eye" onClick={() => setShowPw(false)} />
                 ) : (
-                  <i className="fas fa-eye-slash" onClick={() => setShowPw(true)} />
+                  <i
+                    className="fas fa-eye-slash"
+                    onClick={() => setShowPw(true)}
+                  />
                 )
               }
             />
@@ -65,7 +79,10 @@ export function SignUp({ type }) {
                 showPw ? (
                   <i className="fas fa-eye" onClick={() => setShowPw(false)} />
                 ) : (
-                  <i className="fas fa-eye-slash" onClick={() => setShowPw(true)} />
+                  <i
+                    className="fas fa-eye-slash"
+                    onClick={() => setShowPw(true)}
+                  />
                 )
               }
             />
@@ -79,6 +96,7 @@ export function SignUp({ type }) {
               variant="gradient"
               fullWidth
               color={type === userType.customer ? "blue" : "green"}
+              onClick={handleSignUp}
             >
               Create Account
             </Button>

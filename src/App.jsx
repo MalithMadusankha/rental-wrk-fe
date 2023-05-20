@@ -5,6 +5,7 @@ import { appRoutes } from "./data";
 
 function App() {
   sessionStorage.setItem('isLogged', false);
+  sessionStorage.setItem('isCustomer', true);
 
   return (
     <>

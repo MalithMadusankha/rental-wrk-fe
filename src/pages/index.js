@@ -6,3 +6,4 @@ export * from "@/pages/auth/sign-up-type";
 export * from "@/pages/secure/app-type";
 export * from "@/pages/secure/chatbot";
 export * from "@/pages/secure/customer";
+export * from "@/pages/secure/service-provider";

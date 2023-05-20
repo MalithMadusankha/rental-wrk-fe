@@ -16,6 +16,7 @@ export const appRoutes = {
       appType: "/app-type",
       chatbot: "/chatbot",
       customer: "/customer",
+      serviceProvider: "/service-provider",
     },
     profileRouts: {
       myProfile: "/app-type",
