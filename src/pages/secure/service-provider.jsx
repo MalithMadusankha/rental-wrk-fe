@@ -22,28 +22,30 @@ export const ServiceProviderPage = () => {
       <div className="relative h-screen" style={{ height: "110px" }}>
         <div className="absolute top-0 h-full w-full bg-black/75" />
       </div>
-
-      <section className="bg-black/50 px-4 pb-20 pt-20">
-        <div className="container mx-auto">
-          <Typography
-            variant="h3"
-            className="text-center font-bold"
-            color="blue-gray"
-          >
-            Popular Rental Jobs
-          </Typography>
-          <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {popularJobs.map(({ title, desc, location }) => (
-              <JobCard
-                title={title}
-                desc={desc}
-                location={location}
-                key={title}
-              />
-            ))}
+      
+      {popularJobs.length > 0 && (
+        <section className="bg-black/50 px-4 pb-20 pt-20">
+          <div className="container mx-auto">
+            <Typography
+              variant="h3"
+              className="text-center font-bold"
+              color="blue-gray"
+            >
+              Popular Rental Jobs
+            </Typography>
+            <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {popularJobs.map(({ title, desc, location }) => (
+                <JobCard
+                  title={title}
+                  desc={desc}
+                  location={location}
+                  key={title}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="bg-black/10 px-4 pb-20 pt-20">
         <div className="container m-auto">
@@ -51,27 +53,29 @@ export const ServiceProviderPage = () => {
         </div>
       </section>
 
-      <section className="bg-black/25 px-4 pb-20 pt-20">
-        <div className="container mx-auto">
-          <Typography
-            variant="h3"
-            className="text-center font-bold"
-            color="blue-gray"
-          >
-            Paint Jobs
-          </Typography>
-          <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {paintJobs.map(({ title, desc, location }) => (
-              <JobCard
-                title={title}
-                desc={desc}
-                location={location}
-                key={title}
-              />
-            ))}
+      {paintJobs.length > 0 && (
+        <section className="bg-black/25 px-4 pb-20 pt-20">
+          <div className="container mx-auto">
+            <Typography
+              variant="h3"
+              className="text-center font-bold"
+              color="blue-gray"
+            >
+              Paint Jobs
+            </Typography>
+            <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {paintJobs.map(({ title, desc, location }) => (
+                <JobCard
+                  title={title}
+                  desc={desc}
+                  location={location}
+                  key={title}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <Footer />
     </>

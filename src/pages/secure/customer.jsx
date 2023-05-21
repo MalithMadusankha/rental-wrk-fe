@@ -8,7 +8,7 @@ export function CustomerPage() {
   return (
     <>
       <div
-        className="relative flex h-screen content-center items-center justify-center pb-32 pt-16"
+        className="relative flex h-screen content-center items-center justify-center pb-20 pt-32"
         style={{ height: "65vh" }}
       >
         <div className="absolute top-0 h-full w-full bg-black/50" />

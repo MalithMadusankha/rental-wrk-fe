@@ -9,6 +9,7 @@ import {
   CustomerPage,
   ServiceProviderPage,
   ProfileView,
+  DemandArea,
 } from "@/pages";
 import {
   HomeIcon,
@@ -108,6 +109,12 @@ export const secureRouts = [
     name: "Service Provider",
     path: appRoutes.secureRouts.serviceProvider,
     element: <ServiceProviderPage />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Demand Areas",
+    path: appRoutes.secureRouts.demandArea,
+    element: <DemandArea />,
   },
 ];
 

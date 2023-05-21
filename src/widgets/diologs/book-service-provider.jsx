@@ -13,16 +13,20 @@ import {
 } from "@material-tailwind/react";
 import { CalendarDaysIcon, ClockIcon } from "@heroicons/react/24/solid";
 
-const BookServiceProvider = ({ open, handleOpen, serviceProviderData }) => {
+export const BookServiceProvider = ({
+  open,
+  handleOpen,
+  serviceProviderData,
+}) => {
   return (
     <Dialog
       open={open}
       handler={handleOpen}
-      size="xxl"
-      className="px-15 flex h-full items-center justify-center py-20 sm:px-20 md:px-40 lg:px-60 xl:px-80"
-      style={{ background: "darkgray" }}
+      size="xl"
+      className="flex h-full items-center justify-center py-20 px-10 sm:px-40 md:px-60 lg:px-80 shadow-none"
+      style={{ background: "transparent" }}
     >
-      <DialogBody className="h-full w-full">
+      <DialogBody className="h-full">
         <Card>
           <CardHeader
             color="blue"
@@ -38,99 +42,87 @@ const BookServiceProvider = ({ open, handleOpen, serviceProviderData }) => {
             </Typography>
           </CardHeader>
 
-          <CardBody className="flex flex-col gap-4">
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Get your service for:
-              </Typography>
-              <div className="flex w-full items-center gap-4">
-                <Radio id="html" name="type" label="One day" defaultChecked />
-                <Radio id="react" name="type" label="More than one day" />
-              </div>
+          <CardBody>
+            <div className="flex w-full items-center justify-center gap-4">
+              <Radio
+                id="html"
+                name="type"
+                label="Need one-day service"
+                defaultChecked
+              />
+              <Radio id="react" name="type" label="Need more than one-day" />
             </div>
 
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Service Provider Name:
-              </Typography>
+            <Typography variant="paragraph">Service Provider Name:</Typography>
+            <Input
+              size="lg"
+              value={serviceProviderData.name}
+              disabled
+              className="w-full"
+            />
+
+            <Typography variant="paragraph" className="mt-2">
+              Service Provider ID:
+            </Typography>
+            <Input
+              size="lg"
+              value={serviceProviderData.userID}
+              disabled
+              className="w-full"
+            />
+
+            <Typography variant="paragraph" className="mt-2">
+              Contact Number:
+            </Typography>
+            <Input
+              size="lg"
+              value={serviceProviderData.mobile}
+              disabled
+              className="w-full"
+            />
+
+            <div className="mt-5 flex w-full items-center gap-4">
               <Input
-                size="lg"
-                value={serviceProviderData.name}
-                disabled
-                className="w-full"
+                label="Job Start Date"
+                containerProps={{ className: "min-w-[72px]" }}
+                icon={
+                  <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
+                }
+              />
+              <Input
+                label="Job Start Time"
+                containerProps={{ className: "min-w-[72px]" }}
+                icon={<ClockIcon className="h-5 w-5 text-blue-gray-300" />}
               />
             </div>
 
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Service Provider ID:
-              </Typography>
+            <div className="mt-5 flex w-full items-center gap-4">
               <Input
-                size="lg"
-                value={serviceProviderData.userID}
-                disabled
-                className="w-full"
+                label="Job End Date"
+                containerProps={{ className: "min-w-[72px]" }}
+                icon={
+                  <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
+                }
               />
-            </div>
-
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Contact Number:
-              </Typography>
               <Input
-                size="lg"
-                value={serviceProviderData.mobile}
-                disabled
-                className="w-full"
+                label="Job End Time"
+                containerProps={{ className: "min-w-[72px]" }}
+                icon={<ClockIcon className="h-5 w-5 text-blue-gray-300" />}
               />
-            </div>
-
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Job Start Date:
-              </Typography>
-              <div className="flex w-full items-center gap-4">
-                <Input
-                  label="Date"
-                  containerProps={{ className: "min-w-[72px]" }}
-                  icon={
-                    <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
-                  }
-                />
-                <Input
-                  label="Time"
-                  containerProps={{ className: "min-w-[72px]" }}
-                  icon={
-                    <ClockIcon className="h-5 w-5 text-blue-gray-300" />
-                  }
-                />
-              </div>
-            </div>
-
-            <div className="flex w-full items-center gap-10">
-              <Typography variant="paragraph" className="w-4/12">
-                Job End Date:
-              </Typography>
-              <div className="flex w-full items-center gap-4">
-                <Input
-                  label="Date"
-                  containerProps={{ className: "min-w-[72px]" }}
-                  icon={
-                    <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
-                  }
-                />
-                <Input
-                  label="Time"
-                  containerProps={{ className: "min-w-[72px]" }}
-                  icon={
-                    <ClockIcon className="h-5 w-5 text-blue-gray-300" />
-                  }
-                />
-              </div>
             </div>
           </CardBody>
-          <CardFooter className="pt-5">
-            <Button variant="gradient" fullWidth onClick={handleOpen} size="lg">
+
+          <CardFooter className="flex w-full items-center gap-5 pt-5">
+            <Button
+              variant="gradient"
+              fullWidth
+              onClick={handleOpen}
+              size="lg"
+              color="red"
+            >
+              Cancel
+            </Button>
+            <Button variant="gradient" fullWidth size="lg" color="green">
               Next
             </Button>
           </CardFooter>

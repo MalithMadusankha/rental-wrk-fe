@@ -8,11 +8,12 @@ import {
   Option,
   Radio,
 } from "@material-tailwind/react";
+import { LocationCard } from "../cards";
 
 export const LocationContainer = ({ isCustomer }) => {
   return (
-    <div className="mt-20 flex flex-wrap items-center justify-between gap-5">
-      <Card className="h-full w-full md:max-w-[23%] lg:max-w-[28%]">
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <Card className="h-full w-full md:max-w-[25%] lg:max-w-[30%]">
         <CardBody>
           <form className="mt-12 flex flex-col gap-4">
             <div className="mb-5">
@@ -36,7 +37,7 @@ export const LocationContainer = ({ isCustomer }) => {
                 <Radio id="react" name="type" label="Outdoor" />
               </div>
             )}
-            
+
             <Button size="lg" className="mt-8 w-full">
               {isCustomer ? "Search" : "Search Jobs"}
             </Button>
@@ -44,22 +45,8 @@ export const LocationContainer = ({ isCustomer }) => {
         </CardBody>
       </Card>
 
-      <div className="h-full w-full md:max-w-[73%] lg:max-w-[68%]">
-        <div className="mapouter h-full">
-          <div className="gmap_canvas h-full">
-            <iframe
-              className="gmap_iframe h-full"
-              style={{
-                width: "100%",
-                frameborder: "0",
-                scrolling: "no",
-                marginHeight: "0",
-                marginWidth: "0",
-              }}
-              src="https://maps.google.com/maps?width=1151&amp;height=432&amp;hl=en&amp;q=Kotalugodathenna,Niyadurupola,Warakapola,sri lanka&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-            />
-          </div>
-        </div>
+      <div className="h-full w-full md:max-w-[70%] lg:max-w-[65%]">
+        <LocationCard city="Kandy" location={[]} isListView={false} />
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ export const appRoutes = {
       chatbot: "/chatbot",
       customer: "/customer",
       serviceProvider: "/service-provider",
+      demandArea: "/demand-area",
     },
     profileRouts: {
       myProfile: "/profile",

@@ -69,7 +69,8 @@ export function Navbar({ brandName, routes }) {
     if (
       isSecureURL &&
       JSON.parse(sessionStorage.getItem("isCustomer")) &&
-      path === appRoutes.secureRouts.serviceProvider
+      (path === appRoutes.secureRouts.serviceProvider ||
+        path === appRoutes.secureRouts.demandArea)
     ) {
       return;
     } else if (

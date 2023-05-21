@@ -11,3 +11,4 @@ export * from "@/pages/secure/app-type";
 export * from "@/pages/secure/chatbot";
 export * from "@/pages/secure/customer";
 export * from "@/pages/secure/service-provider";
+export * from "@/pages/secure/demand-area";
