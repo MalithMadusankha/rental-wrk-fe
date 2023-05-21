@@ -10,6 +10,8 @@ import {
   CardFooter,
   Input,
   Radio,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import {
   DocumentPlusIcon,
@@ -17,6 +19,7 @@ import {
   ClockIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
+import { jobTypes } from "@/data";
 
 export const JobApplication = ({ handleOpen, open, jobData }) => {
   return (
@@ -50,7 +53,13 @@ export const JobApplication = ({ handleOpen, open, jobData }) => {
                 <Input size="lg" label="Last Name" />
               </div>
 
-              <div className="mt-5 flex w-full items-center gap-4">
+              <div className="mt-3 flex w-full items-center gap-4">
+                <Typography variant="paragraph">Gender:</Typography>
+                <Radio id="html" name="type" label="Male" />
+                <Radio id="react" name="type" label="Female" />
+              </div>
+
+              <div className="mt-3 flex w-full items-center gap-4">
                 <Input size="lg" label="Enter your Email Address" />
                 <Input size="lg" label="Enter your Mobile Number" />
               </div>
@@ -69,69 +78,32 @@ export const JobApplication = ({ handleOpen, open, jobData }) => {
               </div>
 
               <div className="mt-5">
-                <Input
-                  size="lg"
-                  className="w-full"
-                  label="Give a brief description about you"
-                />
-              </div>
-
-              <div className="mt-5 flex w-full items-center gap-4">
-                <Input
-                  size="lg"
-                  className="w-full"
-                  label="Enter the Title of your service"
-                />
-                <Input
-                  size="lg"
-                  className="w-full"
-                  label="Give your available date"
-                  containerProps={{ className: "min-w-[72px]" }}
-                  icon={
-                    <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
-                  }
-                />
-              </div>
-
-              <div className="mt-5">
-                <Typography variant="paragraph">Advertisement Type:</Typography>
-                <div className="ml-10 flex flex-col">
-                  <Radio
-                    id="html"
-                    name="type"
-                    label="Ad placement - LKR.500"
-                    defaultChecked
-                  />
-                  <Radio
-                    id="react"
-                    name="type"
-                    label="Product / Service review - LKR.550"
-                  />
-                  <Radio
-                    id="react"
-                    name="type"
-                    label="Category link - LKR.600"
-                  />
-                  <Radio
-                    id="react"
-                    name="type"
-                    label="Socail media campaign - LKR.650"
-                  />
-                  <Radio
-                    id="react"
-                    name="type"
-                    label="YouTube video - LKR.700"
-                  />
-                </div>
+                <Input size="lg" className="w-full" label="Enter Job Title" />
               </div>
 
               <div className="mt-5">
                 <Input
                   size="lg"
                   className="w-full"
-                  label="Upload your lates photo"
-                  type="file"
+                  label="Enter your special skills"
                 />
+              </div>
+
+              <div className="mt-5">
+                <Input
+                  size="lg"
+                  className="w-full"
+                  label="Describe your experience"
+                />
+              </div>
+
+              <div className="mt-5">
+                <Select label="Select Job Type">
+                  <Option>{jobTypes.plumber}</Option>
+                  <Option>{jobTypes.carPainter}</Option>
+                  <Option>{jobTypes.electrician}</Option>
+                  <Option>{jobTypes.painter}</Option>
+                </Select>
               </div>
             </form>
           </CardBody>
