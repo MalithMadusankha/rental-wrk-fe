@@ -99,7 +99,7 @@ export function Login() {
             </Typography>
             <div className="mt-2 flex justify-center gap-3">
               <Button
-                size="lg"
+                size="sm"
                 variant="outlined"
                 color="blue-gray"
                 className="flex items-center gap-3"
@@ -108,7 +108,7 @@ export function Login() {
                 Google
               </Button>
               <Button
-                size="lg"
+                size="sm"
                 variant="outlined"
                 color="blue-gray"
                 className="flex items-center gap-3"

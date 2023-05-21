@@ -5,6 +5,13 @@ export const jobTypes = {
     painter: "Painter",
 };
 
+export const workTypes = {
+    temp: "Temporary",
+    perm: "Permenent",
+    both: "Both",
+    other: "Other",
+};
+
 export const jobData = [
     {
         title: "Painting job 1",

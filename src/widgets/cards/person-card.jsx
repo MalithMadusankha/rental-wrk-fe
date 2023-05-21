@@ -16,7 +16,7 @@ export const PersonCard = ({ id, img, name }) => {
 
   const handleView = () => {
     navigate({
-      pathname: appRoutes.profileRouts.myProfile,
+      pathname: appRoutes.viewProfileRouts.serviceProviderView,
       search: `?${createSearchParams({
         userID: id,
       })}`,
