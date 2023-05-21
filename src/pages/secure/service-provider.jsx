@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { Typography } from "@material-tailwind/react";
 import { Footer, LocationContainer } from "@/widgets/layout";
 import { JobCard } from "@/widgets/cards";
 import { jobData, jobTypes } from "@/data";
+import { JobApplication } from "@/widgets/diologs";
 
 export const ServiceProviderPage = () => {
+  const [open, setOpen] = useState(false);
+  const [openedJobData, setOpenedJobData] = useState({});
+  const handleOpen = () => setOpen(!open);
+
   const popularJobs = [];
   const paintJobs = [];
 
@@ -22,7 +27,7 @@ export const ServiceProviderPage = () => {
       <div className="relative h-screen" style={{ height: "110px" }}>
         <div className="absolute top-0 h-full w-full bg-black/75" />
       </div>
-      
+
       {popularJobs.length > 0 && (
         <section className="bg-black/50 px-4 pb-20 pt-20">
           <div className="container mx-auto">
@@ -34,14 +39,21 @@ export const ServiceProviderPage = () => {
               Popular Rental Jobs
             </Typography>
             <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {popularJobs.map(({ title, desc, location }) => (
-                <JobCard
-                  title={title}
-                  desc={desc}
-                  location={location}
-                  key={title}
-                />
-              ))}
+              {popularJobs.map(
+                ({ jobID, title, desc, location, jobType, isPopular }) => (
+                  <JobCard
+                    jobID={jobID}
+                    title={title}
+                    desc={desc}
+                    location={location}
+                    jobType={jobType}
+                    isPopular={isPopular}
+                    key={jobID}
+                    handleOpen={handleOpen}
+                    setOpenedJobData={setOpenedJobData}
+                  />
+                )
+              )}
             </div>
           </div>
         </section>
@@ -64,20 +76,35 @@ export const ServiceProviderPage = () => {
               Paint Jobs
             </Typography>
             <div className="mt-16 grid grid-cols-1 gap-5 gap-x-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {paintJobs.map(({ title, desc, location }) => (
-                <JobCard
-                  title={title}
-                  desc={desc}
-                  location={location}
-                  key={title}
-                />
-              ))}
+              {paintJobs.map(
+                ({ jobID, title, desc, location, jobType, isPopular }) => (
+                  <JobCard
+                    jobID={jobID}
+                    title={title}
+                    desc={desc}
+                    location={location}
+                    jobType={jobType}
+                    isPopular={isPopular}
+                    key={jobID}
+                    handleOpen={handleOpen}
+                    setOpenedJobData={setOpenedJobData}
+                  />
+                )
+              )}
             </div>
           </div>
         </section>
       )}
 
       <Footer />
+
+      <Fragment>
+        <JobApplication
+          open={open}
+          handleOpen={handleOpen}
+          jobData={openedJobData}
+        />
+      </Fragment>
     </>
   );
 };
