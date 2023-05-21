@@ -16,8 +16,13 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { CalendarDaysIcon, ClockIcon } from "@heroicons/react/24/solid";
+import {
+  CalendarDaysIcon,
+  ClockIcon,
+  SunIcon,
+} from "@heroicons/react/24/solid";
 import { LocationCard } from "../cards";
+import { appRoutes } from "@/data";
 
 export const BookServiceProvider = ({
   open,
@@ -76,18 +81,27 @@ export const BookServiceProvider = ({
               <TabsBody>
                 <TabPanel value="card" className="p-0">
                   <form className="mt-4">
-                    <div className="flex w-full items-center justify-center gap-4">
-                      <Radio
-                        id="html"
-                        name="type"
-                        label="Need one-day service"
-                        defaultChecked
-                      />
-                      <Radio
-                        id="react"
-                        name="type"
-                        label="Need more than one-day"
-                      />
+                    <div className="flex w-full items-center justify-between gap-4">
+                      <div>
+                        <Radio
+                          id="html"
+                          name="type"
+                          label="Need one-day service"
+                          defaultChecked
+                        />
+                        <Radio
+                          id="react"
+                          name="type"
+                          label="Need more than one-day"
+                        />
+                      </div>
+                      <Button
+                        className="flex items-center p-2"
+                        color="purple"
+                        onClick={() => navigate(appRoutes.secureRouts.wheather)}
+                      >
+                        <SunIcon className="mr-2 h-5 w-5" /> Check Wheather
+                      </Button>
                     </div>
 
                     <Typography variant="paragraph">

@@ -12,3 +12,4 @@ export * from "@/pages/secure/chatbot";
 export * from "@/pages/secure/customer";
 export * from "@/pages/secure/service-provider";
 export * from "@/pages/secure/demand-area";
+export * from "@/pages/secure/wheather";

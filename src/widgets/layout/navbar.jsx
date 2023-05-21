@@ -77,7 +77,8 @@ export function Navbar({ brandName, routes }) {
       isSecureURL &&
       !JSON.parse(sessionStorage.getItem("isCustomer")) &&
       (path === appRoutes.secureRouts.chatbot ||
-        path === appRoutes.secureRouts.customer)
+        path === appRoutes.secureRouts.customer ||
+        path === appRoutes.secureRouts.wheather)
     ) {
       return;
     }

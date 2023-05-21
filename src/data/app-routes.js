@@ -18,6 +18,7 @@ export const appRoutes = {
       customer: "/customer",
       serviceProvider: "/service-provider",
       demandArea: "/demand-area",
+      wheather: "/wheather",
     },
     profileRouts: {
       myProfile: "/profile",

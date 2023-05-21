@@ -10,6 +10,7 @@ import {
   ServiceProviderPage,
   ProfileView,
   DemandArea,
+  Wheather,
 } from "@/pages";
 import {
   HomeIcon,
@@ -115,6 +116,12 @@ export const secureRouts = [
     name: "Demand Areas",
     path: appRoutes.secureRouts.demandArea,
     element: <DemandArea />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Wheather",
+    path: appRoutes.secureRouts.wheather,
+    element: <Wheather />,
   },
 ];
 
