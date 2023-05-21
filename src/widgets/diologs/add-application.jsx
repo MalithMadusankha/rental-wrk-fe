@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
 import {
   Button,
   Dialog,
@@ -10,18 +10,24 @@ import {
   CardFooter,
   Input,
   Radio,
-  Select,
-  Option,
+  DialogFooter,
+  DialogHeader,
 } from "@material-tailwind/react";
-import { CalendarDaysIcon, DocumentPlusIcon } from "@heroicons/react/24/solid";
+import {
+  CalendarDaysIcon,
+  DocumentPlusIcon,
+  InformationCircleIcon,
+} from "@heroicons/react/24/solid";
 
 export const AddApplication = ({ open, handleOpen }) => {
+  const [popupOpen, setPopupOpen] = useState(false);
+  const handlePopupOpen = () => setPopupOpen(!popupOpen);
   return (
     <Dialog
       open={open}
       handler={handleOpen}
       size="xl"
-      className="mt-10 h-full max-h-[90vh] px-20 shadow-none"
+      className="h-full max-h-[90vh] px-20 shadow-none"
       style={{ background: "transparent" }}
     >
       <DialogBody>
@@ -37,6 +43,15 @@ export const AddApplication = ({ open, handleOpen }) => {
             </div>
             <Typography variant="h3" color="white">
               Addvertising Request Form
+            </Typography>
+            <Typography
+              variant="paragraph"
+              color="white"
+              className="mx-20 mt-5"
+            >
+              Need advertising for your bussiness? Send us details about what do
+              you do and let's see what we can do to increase your explosure to
+              your reader.
             </Typography>
           </CardHeader>
 
@@ -66,10 +81,14 @@ export const AddApplication = ({ open, handleOpen }) => {
               </div>
 
               <div className="mt-5">
+                <Input size="lg" className="w-full" label="Description" />
+              </div>
+
+              <div className="mt-5">
                 <Input
                   size="lg"
                   className="w-full"
-                  label="Give a brief description about you"
+                  label="Title of the Service"
                 />
               </div>
 
@@ -77,17 +96,18 @@ export const AddApplication = ({ open, handleOpen }) => {
                 <Input
                   size="lg"
                   className="w-full"
-                  label="Enter the Title of your service"
-                />
-                <Input
-                  size="lg"
-                  className="w-full"
-                  label="Give your available date"
+                  label="Date Needed"
                   containerProps={{ className: "min-w-[72px]" }}
                   icon={
                     <CalendarDaysIcon className="h-5 w-5 text-blue-gray-300" />
                   }
                 />
+                <Button
+                  className="flex items-center p-2"
+                  onClick={handlePopupOpen}
+                >
+                  <InformationCircleIcon className="h-7 w-7" />
+                </Button>
               </div>
 
               <div className="mt-5">
@@ -155,6 +175,24 @@ export const AddApplication = ({ open, handleOpen }) => {
           </CardFooter>
         </Card>
       </DialogBody>
+      <Fragment>
+        <Dialog open={popupOpen} handler={handlePopupOpen}>
+          <DialogHeader> Wheather is affected for you?</DialogHeader>
+          <DialogBody divider>
+            Painters typically monitor weather forecasts to plan their work
+            accordingly. They aim for optimal conditions, such as mild
+            temperatures, moderate humidity, calm winds, and no precipitation,
+            to ensure the best results. When unfavorable weather conditions
+            arise, painters may need to reschedule or find indoor projects to
+            work on instead.
+          </DialogBody>
+          <DialogFooter>
+            <Button variant="text" onClick={handlePopupOpen}>
+              <span>Got it</span>
+            </Button>
+          </DialogFooter>
+        </Dialog>
+      </Fragment>
     </Dialog>
   );
 };
