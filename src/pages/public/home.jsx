@@ -1,18 +1,9 @@
 import React from "react";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Typography,
-  Button,
-  IconButton,
-  Input,
-  Textarea,
-} from "@material-tailwind/react";
+import { Card, Typography, Button } from "@material-tailwind/react";
 import { UsersIcon } from "@heroicons/react/24/solid";
-import { Footer } from "@/widgets/layout";
+import { AddContainer, Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
-import { featuresData, addData, contactData } from "@/data";
+import { featuresData } from "@/data";
 import man1 from "../../assets/man1.png";
 
 export function Home() {
@@ -106,22 +97,7 @@ export function Home() {
       </section>
 
       <section className="px-4 pb-20 pt-20">
-        <div className="container mx-auto">
-          <Typography
-            variant="h3"
-            className="mb-3 text-center font-bold"
-            color="blue-gray"
-          >
-            Advertisements
-          </Typography>
-          <div className="mt-16 grid grid-cols-1 gap-12 gap-x-24 md:grid-cols-2 xl:grid-cols-2">
-            {addData.map(({ img, name }) => (
-              <Card className="flex items-center gap-2 shadow-none" key={name}>
-                <img alt={name} src={img} className="h-full w-full" />
-              </Card>
-            ))}
-          </div>
-        </div>
+        <AddContainer />
       </section>
 
       <Footer />

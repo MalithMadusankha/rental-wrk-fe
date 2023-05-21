@@ -11,6 +11,7 @@ import {
   ProfileView,
   DemandArea,
   Wheather,
+  Advertisements,
 } from "@/pages";
 import {
   HomeIcon,
@@ -40,7 +41,7 @@ export const routes = [
     icon: ArrowRightOnRectangleIcon,
     name: "Advertisements",
     path: appRoutes.publicRouts.advertisements,
-    element: "",
+    element: <Advertisements/>,
     isInfoRoute: false,
   },
   {

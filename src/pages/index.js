@@ -1,4 +1,5 @@
 export * from "@/pages/public/home";
+export * from "@/pages/public/advertisements";
 
 export * from "@/pages/profiles/profile";
 export * from "@/pages/profiles/profile-view";
