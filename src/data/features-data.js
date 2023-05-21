@@ -1,7 +1,7 @@
 import {
   StarIcon,
-  ArrowPathIcon,
-  FingerPrintIcon,
+  CurrencyDollarIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 
 export const featuresData = [
@@ -14,13 +14,13 @@ export const featuresData = [
   {
     color: "red",
     title: "Well Rated Workers",
-    icon: ArrowPathIcon,
+    icon: CurrencyDollarIcon,
     description: "",
   },
   {
     color: "teal",
     title: "All Workers Are Verified",
-    icon: FingerPrintIcon,
+    icon: CheckCircleIcon,
     description: "",
   },
 ];

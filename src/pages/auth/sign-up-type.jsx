@@ -1,7 +1,7 @@
 import React from "react";
 import { TypeSelectPage } from "@/widgets/layout";
 import { TypeSelectCard } from "@/widgets/cards";
-import { StarIcon } from "@heroicons/react/24/solid";
+import { StarIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { appRoutes, userType } from "@/data";
 
 export function SignUpType() {
@@ -21,7 +21,7 @@ export function SignUpType() {
         <TypeSelectCard
           color="green"
           type={`I'm a ${userType.worker}`}
-          icon={React.createElement(StarIcon, {
+          icon={React.createElement(UserCircleIcon, {
             className: "w-5 h-5 text-white",
           })}
           href={appRoutes.authRouts.signUpWorker}

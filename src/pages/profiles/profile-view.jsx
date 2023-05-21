@@ -30,7 +30,7 @@ export const ProfileView = () => {
 
   return (
     <>
-      <section className="relative block h-[50vh]">
+      <section className="relative block h-[50vh]" style={{ background: "blue" }}>
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
       </section>
 

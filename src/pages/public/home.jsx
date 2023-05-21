@@ -5,46 +5,54 @@ import { AddContainer, Footer } from "@/widgets/layout";
 import { FeatureCard } from "@/widgets/cards";
 import { featuresData } from "@/data";
 import man1 from "../../assets/man1.png";
+import man2 from "../../assets/man2.png";
 
 export function Home() {
   return (
     <>
       <div
         className="relative flex h-screen content-center items-center justify-center pb-32 pt-16"
-        style={{ height: "75vh" }}
+        style={{ height: "85vh", background: "blue" }}
       >
         {/* <div className="absolute top-0 h-full w-full bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')] bg-cover bg-center" /> */}
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto">
-          <div className="flex flex-wrap items-center">
+          <div className="relative flex flex-wrap items-center gap-10">
+            <img alt="Card Image" src={man2} className="" />
             <div className="w-full px-4 text-left lg:w-8/12">
+              <div className="flex gap-3 items-end">
+                <Typography
+                  variant="h2"
+                  color="blue"
+                  className="mb-6 font-black font-normal"
+                >
+                  Looking for a reliable rental worker?
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="gray"
+                  className="mb-6 font-black"
+                >
+                  Find one!
+                </Typography>
+              </div>
+
               <Typography
-                variant="h4"
-                color="white"
-                className="mb-6 font-black"
-              >
-                Looking for a reliable rental worker? Find one!
-              </Typography>
-              <Typography
-                variant="h4"
-                color="white"
+                variant="h3"
+                color="orange"
                 className="mb-6 font-black"
               >
                 Select a rental worker near you and get a best service
               </Typography>
+              
               <Typography
                 variant="h4"
-                color="white"
+                color="green"
                 className="mb-6 font-black"
               >
                 Looking for a reliable rental job? There is no better place to
                 start.
               </Typography>
-              {/* <Typography variant="lead" color="white" className="opacity-80">
-                This is a simple example of a Landing Page you can build using
-                Material Tailwind. It features multiple components based on the
-                Tailwind CSS and Material Design by Google.
-              </Typography> */}
             </div>
           </div>
         </div>
@@ -70,8 +78,8 @@ export function Home() {
           </div>
           <div className="mt-32 flex flex-wrap items-center">
             <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white p-3 text-center shadow-lg">
-                <UsersIcon className="h-6 w-6 text-blue-gray-900" />
+              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-black/20 p-4 text-center shadow-lg">
+                <UsersIcon className="h-10 w-10" color="blue"/>
               </div>
               <Typography
                 variant="h3"

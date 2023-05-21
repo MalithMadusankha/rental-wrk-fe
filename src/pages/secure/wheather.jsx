@@ -18,10 +18,17 @@ export const Wheather = () => {
   });
   return (
     <>
-      <div className="relative h-screen" style={{ height: "110px" }}>
-        <div className="absolute top-0 h-full w-full bg-black/75" />
+      <div
+        className="relative h-screen"
+        style={{ height: "110px", background: "blue" }}
+      >
+        <div className="absolute inset-0 z-0 h-full w-full" />
       </div>
-      <section className="flex min-h-[60vh] items-center justify-center bg-black/10 px-4 pb-20 pt-20">
+      <section
+        className="flex min-h-[60vh] items-center justify-center px-4 pb-20 pt-20"
+        style={{ background: "blue" }}
+      >
+        <div className="absolute inset-0 z-0 h-full w-full bg-black/75" />
         {isLoading && (
           <Alert
             variant="gradient"

@@ -36,11 +36,8 @@ export function Login() {
 
   return (
     <>
-      <img
-        src="/img/background-2.jpg"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-      />
-      <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />
+      <div className="absolute inset-0 z-0 h-full w-full" style={{background: "blue"}}/>
+      <div className="absolute inset-0 z-0 h-full w-full bg-black/75"/>
       <div className="container mx-auto p-4">
         <Card className="absolute left-2/4 top-2/4 w-full max-w-[24rem] -translate-x-2/4 -translate-y-2/4">
           <CardHeader
@@ -77,7 +74,7 @@ export function Login() {
           </CardBody>
 
           <CardFooter className="pt-0">
-            <Button variant="gradient" fullWidth onClick={handleLogin}>
+            <Button variant="gradient" fullWidth onClick={handleLogin} size="lg">
               Login
             </Button>
             <Typography variant="small" className="mt-1 flex justify-center">

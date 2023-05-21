@@ -24,7 +24,7 @@ export const ServiceProviderPage = () => {
 
   return (
     <>
-      <div className="relative h-screen" style={{ height: "110px" }}>
+      <div className="relative h-screen" style={{ height: "110px", background: "blue" }}>
         <div className="absolute top-0 h-full w-full bg-black/75" />
       </div>
 

@@ -8,7 +8,7 @@ export const Advertisements = () => {
   const handleOpen = () => setOpen(!open);
   return (
     <>
-      <div className="relative h-screen" style={{ height: "110px" }}>
+      <div className="relative h-screen" style={{ height: "110px", background: "blue" }}>
         <div className="absolute top-0 h-full w-full bg-black/75" />
       </div>
       <section className="relative flex min-h-[60vh] items-center justify-center bg-black/10 px-4 pb-20 pt-10">

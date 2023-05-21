@@ -18,8 +18,8 @@ export function ChatBot() {
   return (
     <>
       <section className="relative block h-[100vh]">
-        <div className="absolute top-0 h-full w-full" />
-        <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
+      <div className="absolute inset-0 z-0 h-full w-full" style={{background: "blue"}}/>
+      <div className="absolute inset-0 z-0 h-full w-full bg-black/75"/>
 
         <div className="flex h-full w-full justify-center pb-48 pt-24">
           <div className="relative mx-16 flex w-full md:mx-24 lg:mx-60">

@@ -32,11 +32,11 @@ export function SignUp({ type }) {
 
   return (
     <>
-      <img
-        src="/img/background-2.jpg"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
+      <div
+        className="absolute inset-0 z-0 h-full w-full"
+        style={{ background: "blue" }}
       />
-      <div className="absolute inset-0 z-0 h-full w-full bg-black/50" />
+      <div className="absolute inset-0 z-0 h-full w-full bg-black/75" />
       <div className="container mx-auto p-4">
         <Card className="absolute left-2/4 top-2/4 w-full max-w-[24rem] -translate-x-2/4 -translate-y-2/4">
           <CardHeader
@@ -96,6 +96,7 @@ export function SignUp({ type }) {
 
           <CardFooter className="pt-0">
             <Button
+              size="lg"
               variant="gradient"
               fullWidth
               color={type === userType.customer ? "blue" : "green"}

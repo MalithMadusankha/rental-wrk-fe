@@ -9,9 +9,9 @@ export function CustomerPage() {
     <>
       <div
         className="relative flex h-screen content-center items-center justify-center pb-20 pt-32"
-        style={{ height: "65vh" }}
+        style={{ height: "65vh", background: "blue" }}
       >
-        <div className="absolute top-0 h-full w-full bg-black/50" />
+        <div className="absolute inset-0 z-0 h-full w-full bg-black/75"/>
         <div className="max-w-8xl container relative m-auto">
           <LocationContainer isCustomer={true} />
         </div>
