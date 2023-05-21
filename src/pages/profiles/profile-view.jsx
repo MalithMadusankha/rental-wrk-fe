@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   Avatar,
@@ -16,19 +16,24 @@ import {
 import { Footer } from "@/widgets/layout";
 import { serviceProviderData } from "@/data";
 import { DevicePhoneMobileIcon } from "@heroicons/react/24/solid";
+import BookServiceProvider from "@/widgets/diologs/book-service-provider";
 
-export function ProfileView() {
+export const ProfileView = () => {
   const [searchParams] = useSearchParams("");
   const serviceProviderID = searchParams.get("userID");
   const filteredData = serviceProviderData.find(
     (user) => user.userID === serviceProviderID
   );
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(!open);
+
   return (
     <>
       <section className="relative block h-[50vh]">
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
       </section>
+
       <section className="relative bg-blue-gray-50/50 px-4 py-16">
         <div className="container mx-auto">
           <div className="relative -mt-64 mb-6 flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-xl shadow-gray-500/5">
@@ -48,7 +53,9 @@ export function ProfileView() {
                 </div>
 
                 <div className="flex w-full justify-center px-4 lg:order-3 lg:mt-0 lg:w-4/12 lg:justify-end lg:self-center">
-                  <Button className="bg-blue-400"> Booking </Button>
+                  <Button className="bg-blue-400" onClick={handleOpen}>
+                    Booking
+                  </Button>
                 </div>
 
                 <div className="flex w-full items-center justify-center px-4 lg:order-1 lg:w-4/12">
@@ -160,11 +167,20 @@ export function ProfileView() {
           </div>
         </div>
       </section>
+
       <div className="bg-blue-gray-50/50">
         <Footer />
       </div>
+
+      <Fragment>
+        <BookServiceProvider
+          open={open}
+          handleOpen={handleOpen}
+          serviceProviderData={filteredData}
+        />
+      </Fragment>
     </>
   );
-}
+};
 
 export default ProfileView;
