@@ -12,7 +12,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { SimpleFooter } from "@/widgets/layout";
-import { appRoutes, userData } from "@/data";
+import { appRoutes, customerUserData, serviceProviderUserData } from "@/data";
 
 export function Login() {
   const [showPw, setShowPw] = useState(false);
@@ -22,22 +22,29 @@ export function Login() {
 
   const handleLogin = () => {
     sessionStorage.setItem("isLogged", true);
-    sessionStorage.setItem("userData", JSON.stringify(userData));
     if (isCustomer) {
-      sessionStorage.setItem('isCustomer', true);
+      sessionStorage.setItem("isCustomer", true);
+      sessionStorage.setItem("userData", JSON.stringify(customerUserData));
       setIsCustomer(true);
       navigate(appRoutes.secureRouts.appType);
     } else {
-      sessionStorage.setItem('isCustomer', false);
+      sessionStorage.setItem("isCustomer", false);
       setIsCustomer(false);
+      sessionStorage.setItem(
+        "userData",
+        JSON.stringify(serviceProviderUserData)
+      );
       navigate(appRoutes.secureRouts.serviceProvider);
     }
   };
 
   return (
     <>
-      <div className="absolute inset-0 z-0 h-full w-full" style={{background: "blue"}}/>
-      <div className="absolute inset-0 z-0 h-full w-full bg-black/75"/>
+      <div
+        className="absolute inset-0 z-0 h-full w-full"
+        style={{ background: "blue" }}
+      />
+      <div className="absolute inset-0 z-0 h-full w-full bg-black/75" />
       <div className="container mx-auto p-4">
         <Card className="absolute left-2/4 top-2/4 w-full max-w-[24rem] -translate-x-2/4 -translate-y-2/4">
           <CardHeader
@@ -74,7 +81,12 @@ export function Login() {
           </CardBody>
 
           <CardFooter className="pt-0">
-            <Button variant="gradient" fullWidth onClick={handleLogin} size="lg">
+            <Button
+              variant="gradient"
+              fullWidth
+              onClick={handleLogin}
+              size="lg"
+            >
               Login
             </Button>
             <Typography variant="small" className="mt-1 flex justify-center">

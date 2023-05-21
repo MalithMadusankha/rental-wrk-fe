@@ -5,3 +5,4 @@ export * from "@/widgets/layout/page-title";
 export * from "@/widgets/layout/type-select-container";
 export * from "@/widgets/layout/location-container";
 export * from "@/widgets/layout/add-container";
+export * from "@/widgets/layout/profile-data-container";

@@ -3,6 +3,7 @@ export * from "@/pages/public/advertisements";
 
 export * from "@/pages/profiles/profile";
 export * from "@/pages/profiles/profile-view";
+export * from "@/pages/profiles/profile-edit";
 
 export * from "@/pages/auth/login";
 export * from "@/pages/auth/sign-up";

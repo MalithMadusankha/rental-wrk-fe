@@ -12,6 +12,7 @@ import {
   DemandArea,
   Wheather,
   Advertisements,
+  ProfileEdit,
 } from "@/pages";
 import {
   HomeIcon,
@@ -41,7 +42,7 @@ export const routes = [
     icon: ArrowRightOnRectangleIcon,
     name: "Advertisements",
     path: appRoutes.publicRouts.advertisements,
-    element: <Advertisements/>,
+    element: <Advertisements />,
     isInfoRoute: false,
   },
   {
@@ -132,6 +133,12 @@ export const profileRouts = [
     name: "My Profile",
     path: appRoutes.profileRouts.myProfile,
     element: <Profile />,
+  },
+  {
+    icon: ArrowRightOnRectangleIcon,
+    name: "Edit Profile",
+    path: appRoutes.profileRouts.editProfile,
+    element: <ProfileEdit />,
   },
   {
     icon: ArrowRightOnRectangleIcon,
