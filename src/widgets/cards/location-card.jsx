@@ -8,10 +8,10 @@ import {
   CardFooter,
 } from "@material-tailwind/react";
 
-export const LocationCard = ({ city, location, isListView }) => {
+export const LocationCard = ({ city, location, isListView, className }) => {
   return (
     <Card className={isListView ? "w-96" : "w-full"}>
-      <CardHeader shadow={false} floated={false} className="h-96 mb-4">
+      <CardHeader shadow={false} floated={false} className={`h-96 mb-4 ${className}`}>
         <div className="h-full w-full">
           <div className="mapouter h-full">
             <div className="gmap_canvas h-full">
