@@ -6,3 +6,5 @@ export * from "@/widgets/layout/type-select-container";
 export * from "@/widgets/layout/location-container";
 export * from "@/widgets/layout/add-container";
 export * from "@/widgets/layout/profile-data-container";
+export * from "@/widgets/layout/customer-profile-edit";
+export * from "@/widgets/layout/service-provider-profile-edit";

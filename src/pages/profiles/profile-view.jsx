@@ -27,6 +27,7 @@ export const ProfileView = () => {
         userData={filteredData}
         isCustomer={false}
         isMe={false}
+        handleOpen={handleOpen}
       />
 
       <div className="bg-blue-gray-50/50">

@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer } from "@/widgets/layout";
 import ReactWeather, { useWeatherBit } from "react-open-weather";
-import { Alert } from "@material-tailwind/react";
+import { Alert, Card, CardBody } from "@material-tailwind/react";
 import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
@@ -9,8 +9,8 @@ import {
 
 export const Wheather = () => {
   const { data, isLoading, errorMessage } = useWeatherBit({
-    // key: "ffc674d86981459692aeb0b5d54f6447", // 21 days from 2023/05/21 - 500 calls per day
-    key: "955586ab534a4e05af95f341c340bfe5", // 50 calls per day
+    key: "ffc674d86981459692aeb0b5d54f6447", // 21 days from 2023/05/21 - 500 calls per day
+    // key: "955586ab534a4e05af95f341c340bfe5", // 50 calls per day
     lat: "48.137154",
     lon: "11.576124",
     lang: "en",
@@ -22,10 +22,10 @@ export const Wheather = () => {
         className="relative h-screen"
         style={{ height: "110px", background: "blue" }}
       >
-        <div className="absolute inset-0 z-0 h-full w-full" />
+        <div className="absolute top-0 h-full w-full bg-black/75" />
       </div>
       <section
-        className="flex min-h-[60vh] items-center justify-center px-4 pb-20 pt-20"
+        className="relative flex min-h-[60vh] items-center justify-center bg-black/10 px-4 pb-20 pt-20"
         style={{ background: "blue" }}
       >
         <div className="absolute inset-0 z-0 h-full w-full bg-black/75" />
@@ -38,15 +38,19 @@ export const Wheather = () => {
           </Alert>
         )}
         {data && (
-          <ReactWeather
-            isLoading={isLoading}
-            errorMessage={errorMessage}
-            data={data}
-            lang="en"
-            locationLabel="Munich"
-            unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
-            showForecast
-          />
+          <Card>
+            <CardBody className="p-0">
+              <ReactWeather
+                isLoading={isLoading}
+                errorMessage={errorMessage}
+                data={data}
+                lang="en"
+                locationLabel="Munich"
+                unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
+                showForecast
+              />
+            </CardBody>
+          </Card>
         )}
         {!data && errorMessage && (
           <Alert

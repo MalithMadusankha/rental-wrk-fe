@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import {
   Avatar,
   Typography,
@@ -13,12 +14,26 @@ import {
   StarIcon,
 } from "@heroicons/react/24/solid";
 import { DevicePhoneMobileIcon } from "@heroicons/react/24/solid";
+import { appRoutes } from "@/data";
 
-export const ProfileDataContainer = ({ userData, isCustomer, isMe }) => {
+export const ProfileDataContainer = ({ userData, isCustomer, isMe, handleOpen }) => {
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate({
+      pathname: appRoutes.profileRouts.editProfile,
+      search: `?${createSearchParams({
+        userID: userData.userID,
+      })}`,
+    });
+  };
+
   const ProfileHandlers = () => {
     return (
       <div className="flex w-full justify-center px-4 lg:order-3 lg:mt-0 lg:w-4/12 lg:justify-end lg:self-center">
-        <Button className="mr-3 bg-blue-400">Edit Profile</Button>
+        <Button className="mr-3" onClick={handleEdit}>
+          Edit Profile
+        </Button>
         <Button color="red">Delete Profile</Button>
       </div>
     );
@@ -47,10 +62,7 @@ export const ProfileDataContainer = ({ userData, isCustomer, isMe }) => {
               {isCustomer && isMe && <ProfileHandlers />}
               {!isCustomer && !isMe && (
                 <div className="flex w-full justify-center px-4 lg:order-3 lg:mt-0 lg:w-4/12 lg:justify-end lg:self-center">
-                  <Button
-                    className="bg-blue-400"
-                    // onClick={handleOpen}
-                  >
+                  <Button className="bg-blue-400" onClick={handleOpen}>
                     Booking
                   </Button>
                 </div>
