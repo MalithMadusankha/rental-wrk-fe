@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Navbar as MTNavbar,
   MobileNav,
@@ -9,79 +9,223 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/solid";
+import { secureRouts, profileRouts } from "@/routes";
+import { appRoutes } from "@/data";
+import { InfoMenu, ProfileMenu } from "@/widgets/navMenu";
 
-export function Navbar({ brandName, routes, action }) {
-  const [openNav, setOpenNav] = React.useState(false);
+export function Navbar({ brandName, routes }) {
+  const [openNav, setOpenNav] = useState(false);
+  const [isLoged, setIsLoged] = useState(
+    JSON.parse(sessionStorage.getItem("isLogged"))
+  );
 
-  React.useEffect(() => {
+  const commonNavList = [];
+  const infoNavList = [];
+  const secureNavList = [];
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const secureURLs = [];
+
+  secureRouts.forEach((route) => {
+    secureURLs.push(route.path);
+    if (route.path !== appRoutes.secureRouts.appType) {
+      secureNavList.push(route);
+    }
+  });
+
+  profileRouts.forEach((route) => {
+    secureURLs.push(route.path);
+  });
+
+  useEffect(() => {
+    if (
+      secureURLs.includes(location.pathname) &&
+      !JSON.parse(sessionStorage.getItem("isLogged"))
+    ) {
+      navigate(appRoutes.publicRouts.home);
+    }
+    setIsLoged(JSON.parse(sessionStorage.getItem("isLogged")));
+  }, [location]);
+
+  routes.forEach((route) => {
+    if (isLoged && route.isInfoRoute) {
+      infoNavList.push(route);
+    } else if (isLoged && !route.isInfoRoute) {
+      commonNavList.push(route);
+    }
+  });
+
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
 
-  const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {routes.map(({ name, path, icon, href, target }) => (
-        <Typography
-          key={name}
-          as="li"
-          variant="small"
-          color="inherit"
-          className="capitalize"
+  const NavBtn = ({ name, path, target, icon, isSecureURL }) => {
+    if (
+      isSecureURL &&
+      JSON.parse(sessionStorage.getItem("isCustomer")) &&
+      (path === appRoutes.secureRouts.serviceProvider ||
+        path === appRoutes.secureRouts.demandArea)
+    ) {
+      return;
+    } else if (
+      isSecureURL &&
+      !JSON.parse(sessionStorage.getItem("isCustomer")) &&
+      (path === appRoutes.secureRouts.chatbot ||
+        path === appRoutes.secureRouts.customer ||
+        path === appRoutes.secureRouts.wheather)
+    ) {
+      return;
+    }
+    return (
+      <Typography
+        key={name}
+        as="li"
+        variant="small"
+        color="inherit"
+        className="capitalize"
+      >
+        <Link
+          to={path}
+          target={target}
+          className="flex items-center gap-1 p-1 font-normal"
         >
-          {href ? (
-            <a
-              href={href}
+          {icon &&
+            React.createElement(icon, {
+              className: "w-[18px] h-[18px] opacity-75 mr-1",
+            })}
+          {name}
+        </Link>
+      </Typography>
+    );
+  };
+
+  const NavList = ({ isMobile }) => {
+    return (
+      <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        {!isLoged &&
+          routes.map(({ name, path, icon, target }) => (
+            <NavBtn
+              key={name}
+              name={name}
+              path={path}
+              icon={icon}
               target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </a>
-          ) : (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </Link>
-          )}
-        </Typography>
-      ))}
-    </ul>
-  );
+              isSecureURL={false}
+            />
+          ))}
+        {isLoged && (
+          <>
+            {commonNavList.map(({ name, path, icon, target }) => (
+              <NavBtn
+                key={name}
+                name={name}
+                path={path}
+                icon={icon}
+                target={target}
+                isSecureURL={false}
+              />
+            ))}
+            {isMobile ? (
+              infoNavList.map(({ name, path, icon, target }) => (
+                <NavBtn
+                  key={name}
+                  name={name}
+                  path={path}
+                  icon={icon}
+                  target={target}
+                  isSecureURL={false}
+                />
+              ))
+            ) : (
+              <InfoMenu infoNavList={infoNavList} />
+            )}
+            {secureNavList.map(({ name, path, icon, target }) => (
+              <NavBtn
+                key={name}
+                name={name}
+                path={path}
+                icon={icon}
+                target={target}
+                isSecureURL={true}
+              />
+            ))}
+          </>
+        )}
+      </ul>
+    );
+  };
+
+  const LoginBtn = ({ isMobile }) => {
+    return (
+      <Link to={appRoutes.authRouts.login}>
+        <Button
+          variant="text"
+          size="sm"
+          color={isMobile ? "blue" : "white"}
+          fullWidth
+        >
+          Login
+        </Button>
+      </Link>
+    );
+  };
+
+  const SignInBtn = () => {
+    return (
+      <Link to={appRoutes.authRouts.signUp}>
+        <Button variant="gradient" size="sm" fullWidth>
+          Sign Up
+        </Button>
+      </Link>
+    );
+  };
+
+  const ProfilePanel = () => {
+    return (
+      <div className="flex items-center">
+        <IconButton
+          variant="text"
+          color="white"
+          size="sm"
+          className="mx-1 rounded-full"
+        >
+          <BellIcon className="h-5 w-5" />
+        </IconButton>
+        <ProfileMenu />
+      </div>
+    );
+  };
 
   return (
     <MTNavbar color="transparent" className="p-3">
       <div className="container mx-auto flex items-center justify-between text-white">
         <Link to="/">
-          <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-bold">
+          <Typography className="ml-2 mr-4 cursor-pointer py-1.5 font-bold">
             {brandName}
           </Typography>
         </Link>
-        <div className="hidden lg:block">{navList}</div>
-        <div className="hidden gap-2 lg:flex">
-          <a
-            href="https://www.material-tailwind.com/blocks?ref=mtkr"
-            target="_blank"
-          >
-            <Button variant="text" size="sm" color="white" fullWidth>
-              pro version
-            </Button>
-          </a>
-          {React.cloneElement(action, {
-            className: "hidden lg:inline-block",
-          })}
+
+        <div className="hidden lg:block">
+          <NavList isMobile={false} />
         </div>
+
+        <div className="hidden gap-2 lg:flex">
+          {isLoged ? (
+            <ProfilePanel />
+          ) : (
+            <>
+              <LoginBtn isMobile={false} />
+              <SignInBtn />
+            </>
+          )}
+        </div>
+
         <IconButton
           variant="text"
           size="sm"
@@ -96,24 +240,21 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </IconButton>
       </div>
+
       <MobileNav
-        className="rounded-xl bg-white px-4 pt-2 pb-4 text-blue-gray-900"
+        className="rounded-xl bg-white px-4 pb-4 pt-2 text-blue-gray-900"
         open={openNav}
       >
         <div className="container mx-auto">
-          {navList}
-          <a
-            href="https://www.material-tailwind.com/blocks/react?ref=mtkr"
-            target="_blank"
-            className="mb-2 block"
-          >
-            <Button variant="text" size="sm" fullWidth>
-              pro version
-            </Button>
-          </a>
-          {React.cloneElement(action, {
-            className: "w-full block",
-          })}
+          <NavList isMobile={true} />
+          {isLoged ? (
+            <ProfilePanel />
+          ) : (
+            <>
+              <LoginBtn isMobile={true} />
+              <SignInBtn />
+            </>
+          )}
         </div>
       </MobileNav>
     </MTNavbar>
@@ -121,23 +262,12 @@ export function Navbar({ brandName, routes, action }) {
 }
 
 Navbar.defaultProps = {
-  brandName: "Material Tailwind React",
-  action: (
-    <a
-      href="https://www.creative-tim.com/product/material-tailwind-kit-react"
-      target="_blank"
-    >
-      <Button variant="gradient" size="sm" fullWidth>
-        free download
-      </Button>
-    </a>
-  ),
+  brandName: "RentMaster",
 };
 
 Navbar.propTypes = {
   brandName: PropTypes.string,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  action: PropTypes.node,
 };
 
 Navbar.displayName = "/src/widgets/layout/navbar.jsx";
